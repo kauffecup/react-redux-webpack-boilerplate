@@ -1,16 +1,16 @@
-var gulp = require('gulp');
-var browserify = require('browserify');
-var watchify = require('watchify');
-var source = require('vinyl-source-stream');
-var babelify = require('babelify');
-var buffer = require('vinyl-buffer');
-var uglify = require('gulp-uglify');
-var envify = require('envify/custom');
-var less = require('gulp-less');
-var postcss = require('gulp-postcss');
-var autoprefixer = require('autoprefixer');
-var csswring = require('csswring');
-var concatCss = require('gulp-concat-css');
+import gulp         from 'gulp';
+import browserify   from 'browserify';
+import watchify     from 'watchify';
+import source       from 'vinyl-source-stream';
+import babelify     from 'babelify';
+import buffer       from 'vinyl-buffer';
+import uglify       from 'gulp-uglify';
+import envify       from 'envify/custom';
+import less         from 'gulp-less';
+import postcss      from 'gulp-postcss';
+import autoprefixer from 'autoprefixer';
+import csswring     from 'csswring';
+import concatCss    from 'gulp-concat-css';
 
 var path = {
   BUNDLE_OUT: 'bundle.js',
@@ -27,7 +27,7 @@ gulp.task('build', ['browserify', 'less']);
 /**
  * Create and minify bundle.js
  */
-gulp.task('browserify', function () {
+gulp.task('browserify', () => {
   process.env['NODE_ENV'] = 'production';
   return browserify(path.ENTRY_POINT)
     .transform(babelify.configure())
@@ -42,22 +42,22 @@ gulp.task('browserify', function () {
 /**
  * Convert all less into minified autoprefixed css
  */
-gulp.task('less', function () {
-  return gulp.src('./client/**/*.less')
+gulp.task('less', () =>
+  gulp.src('./client/**/*.less')
     .pipe(less())
     .pipe(concatCss(path.CSS_OUT))
     .pipe(postcss([
       autoprefixer(),
       csswring.postcss
     ]))
-    .pipe(gulp.dest(path.DEST));
-});
+    .pipe(gulp.dest(path.DEST))
+);
 
 /**
  * In dev mode, watch for changes in client code and Less and
  * rebuild bundle.js or style.css when these happen
  */
-gulp.task('dev', ['less'], function () {
+gulp.task('dev', ['less'], () => {
   gulp.watch(['./client/**/**.less'], ['less']);
 
   var watcher  = watchify(browserify({
@@ -69,7 +69,7 @@ gulp.task('dev', ['less'], function () {
     fullPaths: true
   }));
 
-  return watcher.on('update', function () {
+  return watcher.on('update', () => {
     watcher.bundle()
       .pipe(source(path.BUNDLE_OUT))
       .pipe(gulp.dest(path.DEST))
