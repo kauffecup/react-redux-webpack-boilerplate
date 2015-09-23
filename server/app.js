@@ -1,9 +1,9 @@
 /** Module dependencies. */
-var express = require('express');
-var bodyParser = require('body-parser');
-var path = require('path');
-var logger = require('morgan');
-var routes = require('./routes');
+import express    from 'express';
+import bodyParser from 'body-parser';
+import path       from 'path';
+import logger     from 'morgan';
+import routes     from './routes';
 
 // configure the express server
 var app = express();
@@ -15,6 +15,6 @@ app.use(express.static(path.resolve(__dirname, '../public')));
 app.use('/', routes);
 
 /** Start her up, boys */
-app.listen(app.get('port'), function() {
+app.listen(app.get('port'), () => {
   console.log('Express server listening on port ' + app.get('port'));
 });
