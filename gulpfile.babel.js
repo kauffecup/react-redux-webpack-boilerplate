@@ -26,7 +26,7 @@ var path = {
 /**
  * To build, create bundle.js and style.css
  */
-gulp.task('build', ['browserify', 'less']);
+gulp.task('build', ['browserify', 'less', 'build-server']);
 
 /**
  * Create and minify bundle.js

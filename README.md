@@ -9,9 +9,9 @@ There are a few pre-configured gulp tasks:
     with jsx and es6.
   - `gulp less` will create an auto-prefixed, minified, css file and place it in
     `public/style.css`
-  - `gulp build` runs `browserify` and `less`
   - 'gulp build-server' transpiles the server code from `server/src` to
     `server/lib`
+  - `gulp build` runs `browserify`, `less`, and `build-server`
   - `gulp node-dev` runs `build-server` and kicks off a server. It also starts a
     watch on `server/src` that transpiles every time there's a change. When this
     happens it will restart the server (using the magic of nodeDev).
@@ -21,22 +21,43 @@ There are a few pre-configured gulp tasks:
     for changes in the main style.less file. It double also kicks off
     `node-dev`. It triple also kicks off `browserSync`.
 
-There are three pre-configured npm scripts:
+There are four pre-configured npm scripts:
 
   - `npm run start` kicks off a server at localhost:3000 and serves
     `public/index.html` (which loads in the bundle.js and style.css created
     from either `gulp build` or `gulp dev`)
+  - `npm run build-server` compiles the server-side code. This must be run
+    before `npm start`.
   - `npm run build` kicks off the gulp build. This is necessary if you don't
     want to globally install gulp on a machine (useful when creating a build
     pipeline)
-  - `npm run dev` starts up the server (at localhost:3000), kicks off a watchify
-    (for the unminified bundle with sourcemaps), and watches for changes in
-    style.less and rebuilds the css upon changes. This, as the name suggests, is
-    perfect for devlopment.
+  - `npm run dev` kicks off `gulp dev`
+
+Thus, to run in production:
+
+```sh
+npm install
+npm run build
+npm start
+```
+
+To run in dev mode:
+
+```sh
+npm install
+npm run dev
+```
+
+or:
+
+```sh
+npm install
+gulp dev
+```
 
 ## Server Code Structure
 
-All server code goes under the `server` directory.
+All server code goes under the `server/src` directory.
 
 The main `app` module currently only configures the Express server and sets up
 the routes.
