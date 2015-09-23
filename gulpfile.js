@@ -10,9 +10,11 @@ var less = require('gulp-less');
 var postcss = require('gulp-postcss');
 var autoprefixer = require('autoprefixer');
 var csswring = require('csswring');
+var concatCss = require('gulp-concat-css');
 
 var path = {
-  OUT: 'bundle.js',
+  BUNDLE_OUT: 'bundle.js',
+  CSS_OUT: 'style.css',
   DEST: './public',
   ENTRY_POINT: './client/main.js'
 }
@@ -31,9 +33,9 @@ gulp.task('browserify', function () {
     .transform(babelify.configure())
     .transform(envify({ NODE_ENV: 'production' }))
     .bundle()
-    .pipe(source(path.OUT))  // gives streaming vinyl file object
-    .pipe(buffer())          // convert from streaming to buffered vinyl file object
-    .pipe(uglify())          // minify dat code
+    .pipe(source(path.BUNDLE_OUT))  // gives streaming vinyl file object
+    .pipe(buffer())                 // convert from streaming to buffered vinyl file object
+    .pipe(uglify())                 // minify dat code
     .pipe(gulp.dest(path.DEST));
 });
 
@@ -43,6 +45,7 @@ gulp.task('browserify', function () {
 gulp.task('less', function () {
   return gulp.src('./client/**/*.less')
     .pipe(less())
+    .pipe(concatCss(path.CSS_OUT))
     .pipe(postcss([
       autoprefixer(),
       csswring.postcss
@@ -54,7 +57,7 @@ gulp.task('less', function () {
  * In dev mode, watch for changes in client code and Less and
  * rebuild bundle.js or style.css when these happen
  */
-gulp.task('dev', function () {
+gulp.task('dev', ['less'], function () {
   gulp.watch(['./client/**/**.less'], ['less']);
 
   var watcher  = watchify(browserify({
@@ -68,9 +71,9 @@ gulp.task('dev', function () {
 
   return watcher.on('update', function () {
     watcher.bundle()
-      .pipe(source(path.OUT))
+      .pipe(source(path.BUNDLE_OUT))
       .pipe(gulp.dest(path.DEST))
   }).bundle()
-    .pipe(source(path.OUT))
+    .pipe(source(path.BUNDLE_OUT))
     .pipe(gulp.dest(path.DEST));
 });
