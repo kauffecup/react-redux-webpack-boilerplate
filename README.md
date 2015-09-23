@@ -10,10 +10,16 @@ There are a few pre-configured gulp tasks:
   - `gulp less` will create an auto-prefixed, minified, css file and place it in
     `public/style.css`
   - `gulp build` runs `browserify` and `less`
+  - 'gulp build-server' transpiles the server code from `server/src` to
+    `server/lib`
+  - `gulp node-dev` runs `build-server` and kicks off a server. It also starts a
+    watch on `server/src` that transpiles every time there's a change. When this
+    happens it will restart the server (using the magic of nodeDev).
   - `gulp dev` creates an unminified bundle with source maps for easy debugging
     and use with the Chrome dev tools. It also kicks off a watchify which will
     rebuild a subset of the bundle when a file changes, and kicks off a watch
-    for changes in the main style.less file
+    for changes in the main style.less file. It double also kicks off
+    `node-dev`. It triple also kicks off `browserSync`.
 
 There are three pre-configured npm scripts:
 
