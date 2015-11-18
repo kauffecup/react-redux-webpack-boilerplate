@@ -1,44 +1,26 @@
-# React - Node - Browserify Boilerplate
+# React / Redux / Webpack / Hot-Reloading Boilerplate
 
 ## Understanding, Configuring, and Building
 
-There are a few pre-configured gulp tasks:
+There are a few pre-configured npm scripts:
 
-  - `gulp browserify` will create a minified bundle and place it in
-    `public/bundle.js`. Browserify is already configured with babelify for use
-    with jsx and es6.
-  - `gulp less` will create an auto-prefixed, minified, css file and place it in
-    `public/style.css`
-  - 'gulp build-server' transpiles the server code from `server/src` to
-    `server/lib`
-  - `gulp build` runs `browserify`, `less`, and `build-server`
-  - `gulp node-dev` runs `build-server` and kicks off a server. It also starts a
-    watch on `server/src` that transpiles every time there's a change. When this
-    happens it will restart the server (using the magic of nodeDev).
-  - `gulp dev` creates an unminified bundle with source maps for easy debugging
-    and use with the Chrome dev tools. It also kicks off a watchify which will
-    rebuild a subset of the bundle when a file changes, and kicks off a watch
-    for changes in the main style.less file. It double also kicks off
-    `node-dev`. It triple also kicks off `browserSync`.
-
-There are four pre-configured npm scripts:
-
-  - `npm run start` kicks off a server at localhost:3000 and serves
-    `public/index.html` (which loads in the bundle.js and style.css created
-    from either `gulp build` or `gulp dev`)
-  - `npm run build-server` compiles the server-side code. This must be run
-    before `npm start`.
-  - `npm run build` kicks off the gulp build. This is necessary if you don't
-    want to globally install gulp on a machine (useful when creating a build
-    pipeline)
-  - `npm run dev` kicks off `gulp dev`
+  - `npm run build` uses webpack to build `bundle.js` and places it under the
+    `public` directory. This bundle contains both the js and css for the app.
+  - `npm run start` starts in "production mode" (no hot reloading). This simply
+    spins up the server under `server/app.js`, which right now only serves
+    what's in the public directory. There's an example route under
+    `server/routes.js` to help ya get started.
+  - `npm run dev` is where the magic happens. This introduces the webpack dev
+    and hot middleware (the correct environment variables are set via `npm
+    better run`), which rebuilds the bundle on css or js changes and injects it
+    into the browser using magic. No reloading necessary!
 
 Thus, to run in production:
 
 ```sh
 npm install
 npm run build
-npm start
+npm run start
 ```
 
 To run in dev mode:
@@ -46,13 +28,6 @@ To run in dev mode:
 ```sh
 npm install
 npm run dev
-```
-
-or:
-
-```sh
-npm install
-gulp dev
 ```
 
 ## Server Code Structure
@@ -70,14 +45,12 @@ application. Right now the only route renders the home page.
 
 All client code goes under the `client` directory.
 
-This boilerplate is set up using the [Flux](https://facebook.github.io/flux/)
-architecture.
+This boilerplate is set up using the [Redux](http://redux.js.org/) architecture.
+It's pretty magical.
 
-The main React entry point is `client/main`. This will load in the other app
-components and manage state throughout the application.
+The main React entry point is `client/index`. This will load in the other app
+components and manage state throughout the application. It also loads the main
+reducer from `reducers/myApp` and configures the store.
 
-A `_Store` base class is provided that handles adding change listeners, removing
-change listeners, and emitting a change event.
-
-`Actions`, `constants/Constants`, and `stores/ExampleStore` all show how these
-classes are intented to be used.
+`actions/actions`, `constants/Constants`, and `reducers/myApp` all show how these
+classes are intended to be used.

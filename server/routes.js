@@ -1,9 +1,8 @@
 import express from 'express';
 var router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res) => {
-  res.render('index');
+router.get('/customroute', (req, res) => {
+  res.json({foo: 'bar'});
 });
 
 export default router;
