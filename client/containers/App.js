@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect }          from 'react-redux';
 import Constants            from '../constants/Constants';
+import ExampleComponent     from '../components/ExampleComponent';
 import {
   exampleSimpleAction,
   exampleAsyncAction
@@ -13,11 +14,18 @@ class MyApp extends Component {
     // to use dispatch in tandum with the example actions, all you need to do is:
     //     dispatch(exampleSimpleAction());
 
-    return <div className="my-app">Hello World</div>;
+    return (
+      <div className="my-app" onClick={() => dispatch(exampleSimpleAction())}>
+        Hello World
+        <ExampleComponent />
+        <ExampleComponent />
+        <ExampleComponent />
+      </div>
+    );
   }
 };
 
-// for now, we want it all! and maybe forever honestly, iuno
+// for now, we want it all!
 var select = state => state;
 
 // Wrap the component to inject dispatch and state into it

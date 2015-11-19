@@ -30,6 +30,16 @@ npm install
 npm run dev
 ```
 
+To handle the discrepancies between running the client code in "dev mode" or
+"production mode", there are two helpers provided - `containers/Root.js` and
+`store/configureStore.js`. These modules conditionally load the `.dev` or
+`.prod` extension of their respective file depending on the environment
+variables when webpack is running. The only difference in the respective
+versions are loading the necessary tooling for the dev/debugging redux
+awesomeness. In dev mode, the `DevTools` react component loads and renders which
+provides a visual history of all the actions and allows you to go forwards and
+backwards in time. It also logs all the state changes.
+
 ## Server Code Structure
 
 All server code goes under the `server/src` directory.
