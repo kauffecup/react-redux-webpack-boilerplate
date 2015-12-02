@@ -1,6 +1,5 @@
 import React          from 'react';
 import { render }     from 'react-dom';
-import { Provider }   from 'react-redux';
 import Root           from './containers/Root';
 import configureStore from './store/configureStore';
 
@@ -10,8 +9,8 @@ require('./style.less');
 // make sure all es6 things work correctly in all browsers
 require('babel/polyfill');
 
-let store = configureStore();
-let rootElement = document.getElementById('root');
+const store = configureStore();
+const rootElement = document.getElementById('root');
 
 // React.initializeTouchEvents(true);
 render( <Root store={store} />, rootElement );

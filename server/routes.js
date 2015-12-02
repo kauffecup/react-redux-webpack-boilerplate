@@ -1,5 +1,5 @@
 import express from 'express';
-var router = express.Router();
+const router = new express.Router();
 
 router.get('/customroute', (req, res) => {
   res.json({foo: 'bar'});

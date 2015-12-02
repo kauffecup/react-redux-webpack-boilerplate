@@ -1,32 +1,35 @@
-import React, { Component } from 'react';
-import { connect }          from 'react-redux';
-import Constants            from '../constants/Constants';
-import ExampleComponent     from '../components/ExampleComponent';
+import React, { Component, PropTypes } from 'react';
+import { connect }      from 'react-redux';
+import ExampleComponent from '../components/ExampleComponent';
 import {
-  exampleSimpleAction,
-  exampleAsyncAction
+  exampleSimpleAction
 }   from '../actions/actions';
 
 class MyApp extends Component {
-  render () {
+  render() {
     // injected via connect call
-    var {dispatch, exampleState} = this.props;
+    const {dispatch, exampleState} = this.props;
     // to use dispatch in tandum with the example actions, all you need to do is:
     //     dispatch(exampleSimpleAction());
 
     return (
       <div className="my-app" onClick={() => dispatch(exampleSimpleAction())}>
         Hello World
-        <ExampleComponent />
-        <ExampleComponent />
-        <ExampleComponent />
+        <ExampleComponent exampleState={exampleState} />
+        <ExampleComponent exampleState={exampleState} />
+        <ExampleComponent exampleState={exampleState} />
       </div>
     );
   }
+}
+
+MyApp.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+  exampleState: PropTypes.object.isRequired
 };
 
 // for now, we want it all!
-var select = state => state;
+const select = state => state;
 
 // Wrap the component to inject dispatch and state into it
-export default connect(select)(MyApp)
+export default connect(select)(MyApp);

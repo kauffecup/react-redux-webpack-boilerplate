@@ -11,5 +11,5 @@ export function exampleRequest(url) {
           resolve(res.body);
         }
       });
-  })
+  });
 }
