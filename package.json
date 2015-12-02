@@ -5,7 +5,8 @@
   "scripts": {
     "start": "better-npm-run start",
     "build": "better-npm-run build",
-    "dev": "better-npm-run dev"
+    "dev": "better-npm-run dev",
+    "lint": "eslint --ignore-path .gitignore ."
   },
   "betterScripts": {
     "build": {
@@ -50,6 +51,9 @@
     "babel-loader": "~5.3.3",
     "babel-plugin-react-transform": "^1.1.1",
     "css-loader": "^0.23.0",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^1.0.2",
+    "eslint-plugin-react": "^3.11.2",
     "less": "^2.5.3",
     "less-loader": "^2.2.1",
     "react-hot-loader": "^1.3.0",
