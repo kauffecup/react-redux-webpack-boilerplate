@@ -14,10 +14,28 @@ module.exports = {
   },
   module: {
     loaders: [
-      { test: /\.js$/, exclude: /node_modules/, loaders: ['babel']},
       { test: /\.svg$/, loaders: ['raw-loader']},
       // take all less files, compile them, and bundle them in with our js bundle
-      { test: /\.less$/, loader: 'style!css!autoprefixer?browsers=last 2 version!less' }
+      { test: /\.less$/, loader: 'style!css!autoprefixer?browsers=last 2 version!less' },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        loader: 'babel',
+        query: {
+          stage: 0,
+          plugins: ['react-transform'],
+          extra: {
+            'react-transform': [{
+              target: 'react-transform-hmr',
+              imports: ['react'],
+              locals: ['module']
+            }, {
+              'transform': 'react-transform-catch-errors',
+              'imports': ['react', 'redbox-react']
+            }]
+          }
+        }
+      }
     ]
   },
   plugins: [
