@@ -2,7 +2,7 @@ import React, { Component, PropTypes } from 'react';
 import { connect }      from 'react-redux';
 import ExampleComponent from '../components/ExampleComponent';
 import {
-  exampleSimpleAction
+  exampleSimpleAction,
 }   from '../actions/actions';
 
 class MyApp extends Component {
@@ -25,7 +25,7 @@ class MyApp extends Component {
 
 MyApp.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  exampleState: PropTypes.object.isRequired
+  exampleState: PropTypes.object.isRequired,
 };
 
 // for now, we want it all!

@@ -1,6 +1,5 @@
 extends: airbnb
 rules:
-  comma-dangle: 0
   no-loop-func: 1
   no-multi-spaces: 0
   no-script-url: 1
