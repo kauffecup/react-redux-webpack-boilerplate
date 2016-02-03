@@ -1,9 +1,11 @@
+'use strict';
+
 /** Module dependencies. */
-import express    from 'express';
-import bodyParser from 'body-parser';
-import path       from 'path';
-import logger     from 'morgan';
-import routes     from './routes';
+const express    = require('express');
+const bodyParser = require('body-parser');
+const path       = require('path');
+const logger     = require('morgan');
+const routes     = require('./routes');
 
 const port = process.env.PORT || 3000;
 

@@ -16,24 +16,28 @@
       }
     },
     "start": {
-      "command": "babel-node server/app.js",
+      "command": "node --harmony_destructuring server/app.js",
       "env": {
         "NODE_ENV": "production"
       }
     },
     "dev": {
-      "command": "babel-node server/app.js",
+      "command": "node --harmony_destructuring server/app.js",
       "env": {
         "NODE_ENV": "development"
       }
     }
   },
   "dependencies": {
-    "bluebird": "^3.0.5",
-    "body-parser": "^1.13.3",
-    "express": "^4.13.3",
     "babel": "^6.3.26",
     "babel-polyfill": "^6.3.14",
+    "better-npm-run": "0.0.6",
+    "bluebird": "^3.2.1",
+    "body-parser": "^1.14.2",
+    "eslint": "^1.10.3",
+    "eslint-config-airbnb": "^1.0.2",
+    "eslint-plugin-react": "^3.16.1",
+    "express": "^4.13.4",
     "keymirror": "^0.1.1",
     "morgan": "^1.6.1",
     "object-assign": "^3.0.0",
@@ -71,5 +75,8 @@
     "webpack-dev-middleware": "^1.5.1",
     "webpack-dev-server": "^1.14.1",
     "webpack-hot-middleware": "^2.6.4"
+  },
+  "engines": {
+    "node": ">5.0.0"
   }
 }
