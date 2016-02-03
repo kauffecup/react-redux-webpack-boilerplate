@@ -7,7 +7,7 @@ import configureStore from './store/configureStore';
 // but for now this is our move
 require('./style.less');
 // make sure all es6 things work correctly in all browsers
-require('babel/polyfill');
+require('babel-polyfill');
 
 const store = configureStore();
 const rootElement = document.getElementById('root');

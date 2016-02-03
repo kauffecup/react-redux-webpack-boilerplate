@@ -5,6 +5,7 @@ module.exports = {
   devtool: 'cheap-module-eval-source-map',
   entry: [
     'webpack-hot-middleware/client',
+    'babel-polyfill',
     path.join(__dirname, '../client/index'),
   ],
   output: {
@@ -20,22 +21,17 @@ module.exports = {
       {
         test: /\.js$/,
         exclude: /node_modules/,
-        loader: 'babel',
+        loader: 'babel-loader',
         query: {
-          stage: 0,
-          plugins: ['react-transform'],
-          extra: {
-            'react-transform': [
-              {
-                target: 'react-transform-hmr',
-                imports: ['react'],
-                locals: ['module'],
-              }, {
-                'transform': 'react-transform-catch-errors',
-                'imports': ['react', 'redbox-react'],
-              },
-            ],
-          },
+          presets: ['es2015', 'react'],
+          plugins: [['react-transform', {
+            transforms: [{
+              transform: 'react-transform-hmr',
+              imports: ['react'],
+              // this is important for Webpack HMR:
+              locals: ['module']
+            }],
+          }]],
         },
       },
     ],
