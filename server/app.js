@@ -1,11 +1,9 @@
-'use strict';
-
 /** Module dependencies. */
-const express    = require('express');
+const express = require('express');
 const bodyParser = require('body-parser');
-const path       = require('path');
-const logger     = require('morgan');
-const routes     = require('./routes');
+const path = require('path');
+const logger = require('morgan');
+const routes = require('./routes');
 
 const port = process.env.PORT || 3000;
 
@@ -37,5 +35,5 @@ app.use('/', routes);
 
 /** Start her up, boys */
 app.listen(app.get('port'), () => {
-  console.log('Express server listening on port ' + app.get('port'));
+  console.log(`Express server listening on port ${app.get('port')}`);
 });
