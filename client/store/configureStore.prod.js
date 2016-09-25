@@ -1,5 +1,5 @@
 import { createStore, applyMiddleware } from 'redux';
-import thunk    from 'redux-thunk';
+import thunk from 'redux-thunk';
 import StockApp from '../reducers';
 
 // create a store that has redux-thunk middleware enabled

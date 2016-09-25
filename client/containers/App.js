@@ -3,9 +3,10 @@ import { connect } from 'react-redux';
 import ExampleComponent from '../components/ExampleComponent';
 import {
   exampleSimpleAction,
-}   from '../actions/actions';
+} from '../actions/actions';
 
 const MyApp = ({ dispatch, exampleState }) => (
+  // eslint-disable-next-line
   <div className="my-app" onClick={() => dispatch(exampleSimpleAction())}>
     Hello World
     <ExampleComponent exampleState={exampleState} />
