@@ -1,8 +1,8 @@
 import { createStore, applyMiddleware, compose } from 'redux';
-import thunk        from 'redux-thunk';
-import StockApp     from '../reducers';
+import thunk from 'redux-thunk';
 import createLogger from 'redux-logger';
-import DevTools     from '../containers/DevTools';
+import StockApp from '../reducers';
+import DevTools from '../containers/DevTools';
 
 // create a store that has redux-thunk middleware, and dev tooling enabled.
 // the logger middleware logs the previous state, the action, and the next
@@ -21,6 +21,7 @@ export default function configureStore() {
   // enable webpack hot module replacement for reducers
   if (module.hot) {
     module.hot.accept('../reducers', () => {
+      // eslint-disable-next-line
       const nextRootReducer = require('../reducers');
       store.replaceReducer(nextRootReducer);
     });

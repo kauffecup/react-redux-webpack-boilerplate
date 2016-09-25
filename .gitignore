@@ -1,7 +1,5 @@
 node_modules/*
-public/bundle.js
+coverage
 build
 public/*.css
-server/lib/*
-*.sublime-workspace
 *.log
