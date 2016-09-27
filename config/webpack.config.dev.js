@@ -1,6 +1,5 @@
 const autoprefixer = require('autoprefixer');
 const webpack = require('webpack');
-const findCacheDir = require('find-cache-dir');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const InterpolateHtmlPlugin = require('react-dev-utils/InterpolateHtmlPlugin');

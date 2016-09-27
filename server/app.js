@@ -11,7 +11,7 @@ const port = process.env.PORT || 3000;
 const app = express();
 
 // if we're developing, use webpack middleware for module hot reloading
-if (process.env.NODE_ENV !== 'production') {
+if (process.env.NODE_ENV === 'development') {
   console.log('==> 🌎 using webpack');
 
   // load and configure webpack
